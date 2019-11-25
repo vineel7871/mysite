@@ -1,10 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>todo</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <h3>To-Do's</h3>
+    {% if error_message %}<p><font color="red"><strong>{{ error_message }}</strong></font></p>{% endif %}
+    <form action="{% url 'todo:add_task' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="task_text" id="addtask" value="Add Task">
+        <input type="submit" value="Add Task">
+    </form>
+    {% if tasks %}
+        <form action="{% url 'todo:complete_post' %}" method="post">
+            {% csrf_token %}
+            {% for task in tasks %}
+                <p>
+                    <input type="checkbox" name="{{task.id}}" value="done" id="box{{forloop.counter}}">
+                    <a href="{% url 'todo:complete_task' task.id %}">{{task.task}}</a>
+                </p>
+            {% endfor %}
+            <input type="submit" value="Complete Tasks">
+        </form>
+    {% endif %}
+    <p></p>
+    {% if completed_tasks %}
+    <h3>Completed To-Do's</h3>
+        <form action="{% url 'todo:archive_post' %}" method="post">
+            {% csrf_token %}
+            {% for completed_task in completed_tasks %}
+                <p>
+                    <input type="checkbox" name="{{completed_task.id}}" value="done" id="cbox{{forloop.counter}}">
+                    <font color="grey"><s><a href="{% url 'todo:archive_task' completed_task.id %}">{{completed_task.task}}</a></s></font>
+                </p>
+            {% endfor %}
+            <input type="submit" value="Archive Tasks">
+        </form>
+    {% endif %}
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 </body>
 </html>
