@@ -11,8 +11,10 @@
     <title>polls</title>
 </head>
 <body>
-<div class="container">
+<div class="container" >
+    <br />
     <h3>{{ question.question_text }}</h3>
+    <br />
     <ul>
         {% for choice in question.choice_set.all %}
         <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>

@@ -11,14 +11,17 @@
     <title>todo</title>
 </head>
 <body>
-<div class="container">
+<div class="container" align="center">
+    <br />
     <h3>To-Do's</h3>
+    <br />
     {% if error_message %}<p><font color="red"><strong>{{ error_message }}</strong></font></p>{% endif %}
     <form action="{% url 'todo:add_task' %}" method="post">
         {% csrf_token %}
         <input type="text" name="task_text" id="addtask" value="Add Task">
         <input type="submit" value="Add Task">
     </form>
+    <br />
     {% if tasks %}
         <form action="{% url 'todo:complete_post' %}" method="post">
             {% csrf_token %}
@@ -30,10 +33,13 @@
             {% endfor %}
             <input type="submit" value="Complete Tasks">
         </form>
+    {% else %}
+        <p>No tasks available</p>
     {% endif %}
-    <p></p>
+    <br />
     {% if completed_tasks %}
     <h3>Completed To-Do's</h3>
+    <br />
         <form action="{% url 'todo:archive_post' %}" method="post">
             {% csrf_token %}
             {% for completed_task in completed_tasks %}
