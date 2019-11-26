@@ -1,33 +1,35 @@
 <!doctype html>
 <html lang="en">
+{% if blog_data %}
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta description="{{blog_data.meta_description}}" keywords="{{blog_data.meta_keywords}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Blog Home</title>
+    <title>{{blog_data.title}}</title>
 </head>
 <body>
 
 <div class="container" >
     <br />
-    <h4>Home page of Blogs</h4>
+    <h4>{{blog_data.heading}}</h4>
     <br />
-    {% if blog_data %}
-        <ol>
-            {% for blog in blog_data %}
-                <li><a href="{% url 'blog:blog_page' blog.id %}">{{ blog.title }}</a></li>
-            {% endfor %}
-        </ol>
-    {% else %}
-        <p>No Blogs are available.</p>
-    {% endif %}
+    <p>{{blog_data.content}}</p>
+    <br />
+    <p>Author : {{blog_data.author}}</p>
+    <p>Published Date : {{blog_data.pubdate}}</p>
 </div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 </body>
+{% else %}
+        <h4 class="container">No such Blog is available.</h4>
+        <br />
+        <a href="{% url 'blog:blog_index' %}">Go to Blog's Home</a>
+{% endif %}
 </html>

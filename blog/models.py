@@ -7,7 +7,7 @@ class BlogPost(models.Model):
     header = models.TextField(max_length=80)
     content = models.TextField()
     author = models.CharField(max_length=40)
-    status = models.BinaryField(default=True)
+    status = models.CharField(max_length=5)
     # meta data
     title = models.TextField(max_length=80, default=header)
     meta_description = models.TextField(max_length=160, default=None)
