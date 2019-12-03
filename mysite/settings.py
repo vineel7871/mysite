@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'polls',
     'home',
     'blog',
+    'login',
+    'chat',
 ]
 
 MIDDLEWARE = [
