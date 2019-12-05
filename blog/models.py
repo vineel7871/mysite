@@ -13,6 +13,6 @@ class BlogPost(models.Model):
     meta_description = models.TextField(max_length=160, default=None)
     meta_keywords = models.TextField(max_length=160, default=None)
     # availability
-    pubtime = models.DateTimeField()
+    pubdate = models.DateTimeField()
     available_from = models.DateTimeField(default=None)
     available_till = models.DateTimeField(default=None)

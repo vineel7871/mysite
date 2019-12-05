@@ -14,8 +14,16 @@
 
 <div class="container" align="center">
     <br />
-    <h3>This is login page for my app</h3>
+    <h3>Login</h3>
     <br />
+    {% if error_message %}<p><font color="red"><strong>{{ error_message }}</strong></font></p>{% endif %}
+    <form action="{% url 'login:try_login' %}" method="post">
+        {% csrf_token %}
+        <p>username: &nbsp;&nbsp;&nbsp;<input type="textbox" name="user_id" required></p>
+        <p>password: &nbsp;&nbsp;&nbsp;<input type="password" name="password" required></p>
+        <p><input type="submit"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <p>Does not have an account <a href="{% url 'login:create_home' %}">Create Account</a></p>
+    </form>
 </div>
 
 <!-- Optional JavaScript -->
